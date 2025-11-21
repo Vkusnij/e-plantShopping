@@ -23,7 +23,9 @@ const CartItem = ({ onContinueShopping }) => {
 
   const handleContinueShopping = (e) => {
     e.preventDefault();
-    if (onContinueShopping) onContinueShopping(e);
+    if (onContinueShopping) {
+      onContinueShopping(e);
+    }
   };
 
   const handleCheckoutShopping = (e) => {
@@ -32,12 +34,22 @@ const CartItem = ({ onContinueShopping }) => {
   };
 
   const handleIncrement = (item) => {
-    dispatch(updateQuantity({ name: item.name, quantity: item.quantity + 1 }));
+    dispatch(
+      updateQuantity({
+        name: item.name,
+        quantity: item.quantity + 1,
+      })
+    );
   };
 
   const handleDecrement = (item) => {
     if (item.quantity > 1) {
-      dispatch(updateQuantity({ name: item.name, quantity: item.quantity - 1 }));
+      dispatch(
+        updateQuantity({
+          name: item.name,
+          quantity: item.quantity - 1,
+        })
+      );
     } else {
       dispatch(removeItem(item.name));
     }
@@ -49,7 +61,6 @@ const CartItem = ({ onContinueShopping }) => {
 
   return (
     <div className="cart-container">
-      {/* класс меняем на тот, что в CSS */}
       <h2 className="total_cart_amount">
         Total Cart Amount: ${calculateTotalAmount()}
       </h2>
@@ -71,11 +82,9 @@ const CartItem = ({ onContinueShopping }) => {
               >
                 -
               </button>
-
               <span className="cart-item-quantity-value">
                 {item.quantity}
               </span>
-
               <button
                 className="cart-item-button"
                 onClick={() => handleIncrement(item)}
